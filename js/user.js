@@ -85,6 +85,7 @@ function updateUIOnUserLogin() {
   // display current stories 
   putStoriesOnPage();
   $allStoriesList.show(); 
+  
   // update Nav bar
   updateNavOnLogin();
   // retrieve's currentUser information

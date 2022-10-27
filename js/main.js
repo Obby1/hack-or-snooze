@@ -53,7 +53,6 @@ async function start() {
 //removes splash overlay 
 setTimeout(function(){
   $(`#splash-overlay`).remove();
-  $stars.show();
 }, 3100)
 
 // Once the DOM is entirely loaded, begin the app

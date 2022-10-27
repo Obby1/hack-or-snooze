@@ -1,7 +1,8 @@
 /* General typography */
 
 body {
-  font-family: Arimo, sans-serif;
+  /* font-family: Arimo, sans-serif; */
+  font-family: Montserrat;
   margin: 8px 7.5vw;
   background-color: #b0617d;
 }
@@ -131,7 +132,7 @@ form > hr {
   height: 0px;
   padding: 0px;
  border: 130em solid;
- border-color: #27364f;
+ border-color: #1c2638;
 
   /* border: 130em solid #b0617d; */
 
