@@ -1,4 +1,7 @@
 /* General typography */
+/* to do:
+adjust bounce so it looks perfect on body reveal. Play with colors and fonts.  */
+
 
 body {
   /* font-family: Arimo, sans-serif; */
@@ -126,7 +129,6 @@ form > hr {
 }
 
 /* based on: https://codepen.io/hiteshsahu/pen/MOgzej */
-/* adjust bounce so it looks perfect on body reveal. Play with colors and fonts.  */
 
 .welcome .splash {
   height: 0px;
