@@ -22,7 +22,7 @@ class Story {
   }
 
   /** Parses hostname out of URL and returns it. */
-  // uses URL constructor & host instance property
+  // uses URL constructor & host instance
 
   getHostName() {
     return new URL(this.url).host;
@@ -34,37 +34,27 @@ class Story {
  * List of Story instances: used by UI to show story lists in DOM.
  */
 
+// Creates a new StoryList instance
+// calls API, builds array of new Story instances
+// stores these individual instances in StoryList
 class StoryList {
   constructor(stories) {
     this.stories = stories;
   }
-
-  /** Generate a new StoryList. It:
-   *
-   *  - calls the API
-   *  - builds an array of Story instances
-   *  - makes a single StoryList instance out of that
-   *  - returns the StoryList instance.
-   */
-
+   // StoryList.getStories method
+   // calls the API to GET current stories
+   // creates new Story instances
   static async getStories() {
-    // Note presence of `static` keyword: this indicates that getStories is
-    //  **not** an instance method. Rather, it is a method that is called on the
-    //  class directly. Why doesn't it make sense for getStories to be an
-    //  instance method?
-    // answer: because retrieving stories can be called even without the class StoryList
-    // this method can be called at any time
 
-    // query the /stories endpoint (no auth required)
     const response = await axios({
       url: `${BASE_URL}/stories`,
       method: "GET",
     });
 
-    // turn plain old story objects from API into instances of Story class
+    // turns plain story objects from API response into new instances of Story class
     const stories = response.data.stories.map(story => new Story(story));
 
-    // build an instance of our own class using the new array of stories
+    // build an instance of StoryList class using the new array of stories
     return new StoryList(stories);
   }
 
@@ -76,16 +66,16 @@ class StoryList {
    */
 
   async addStory( user, { title, author, url }) {
-    // UNIMPLEMENTED: complete this function!
-    // const token = user.loginToken;
     const token = user.loginToken;
+    //sends post request to API
     const response = await axios({
       method: "POST",
       url: `${BASE_URL}/stories`,
       data: { token, story: { title, author, url } },
     });
-
+    // new Story instance is created
     const story = new Story(response.data.story);
+    //
     this.stories.unshift(story);
     user.ownStories.unshift(story);
 
@@ -93,7 +83,7 @@ class StoryList {
   }
 
   async removeStory(user, storyId) {
-    // const token = user.loginToken;
+
     await axios({
       url: `${BASE_URL}/stories/${storyId}`,
       method: "DELETE",
@@ -141,13 +131,8 @@ class User {
     this.loginToken = token;
   }
 
-  /** Register new user in API, make User instance & return it.
-   *
-   * - username: a new username
-   * - password: a new password
-   * - name: the user's full name
-   */
 
+// User.signup method returns new User instance 
   static async signup(username, password, name) {
     const response = await axios({
       url: `${BASE_URL}/signup`,
@@ -169,12 +154,8 @@ class User {
     );
   }
 
-  /** Login in user with API, make User instance & return it.
-
-   * - username: an existing user's username
-   * - password: an existing user's password
-   */
-
+// when login button pressed run User.login method, a new User instance is created
+//submit a POST request to API and retrieve new User instance
   static async login(username, password) {
     const response = await axios({
       url: `${BASE_URL}/login`,
