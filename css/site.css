@@ -1,6 +1,7 @@
 /* General typography */
 /* to do:
-adjust bounce so it looks perfect on body reveal. Play with colors and fonts.  */
+adjust bounce so it looks perfect on body reveal. Play with colors and fonts.
+fix scrolling functionality  */
 
 
 body {
@@ -144,7 +145,7 @@ form > hr {
   top: 100%;
   display: block;
   box-sizing: initial;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   border-radius: 50%;
   transform: translate(-50%, -50%);
@@ -160,7 +161,7 @@ form > hr {
   position: absolute;
   left: 50%;
   top: 50%;
-  overflow: hidden;
+  /* overflow: hidden; */
   opacity: 0;
   transform: translate(-50%, -50%);
   border-radius: 50%;
@@ -276,14 +277,13 @@ form > hr {
   }
 } 
 
-/* stars animation below
-set loading page and background to gradient */
+/* Based on Parallax Stars: https://codepen.io/CKH4/pen/vNyyaL */
 
 body {
   /* width: 100vw;
-  height: 100vh;
-  margin: 0; */
-  overflow: hidden;
+  height: 100vh; */
+  /* margin: 0; */
+  /* overflow: hidden; */
   background-image: radial-gradient(center, ellipse cover, #27364f 0%, #112 50%, #112 100%);
   background: -moz-radial-gradient(center, ellipse cover, #27364f 0%, #112 50%, #112 100%);
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #27364f), color-stop(50%, #112), color-stop(100%, #112));

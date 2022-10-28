@@ -9,6 +9,7 @@ let storyList;
 async function getAndShowStoriesOnStart() {
   // runs getStories method and creates new StoryList instance
   // assigns the new StoryList instance to the global storyList variable
+  // storyList containts getStories method
   storyList = await StoryList.getStories();
   $storiesLoadingMsg.remove();
   // generate markup for stories and display on page
@@ -82,7 +83,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-//study below chain
+
 async function submitNewStory(evt) {
   evt.preventDefault();
   // grab all info from form
@@ -92,20 +93,22 @@ async function submitNewStory(evt) {
   const username = currentUser.username
   const storyData = {title, url, author, username };
 
-  //runs addStory function (in model.js)
+  //run addStory method from storyList global variable
   const story = await storyList.addStory(currentUser, storyData);
 
   const $story = generateStoryMarkup(story);
   $allStoriesList.prepend($story);
 
-  // hide the form and reset it
+  // hide the form and reset it 
   $submitForm.slideUp("slow");
   $submitForm.trigger("reset");
 }
 $submitForm.on("submit", submitNewStory);
 
 
-// Checks if there are existing favorite stories and append them to the DOM
+// Checks if there are existing favorited stories 
+// add HTML markup and append them to the DOM
+// if current User instance has no favorites, append no favorites 
 function putFavoritesListOnPage() {
   $favoritedStories.empty();
   if (currentUser.favorites.length === 0) {
@@ -120,7 +123,10 @@ function putFavoritesListOnPage() {
   $favoritedStories.show();
 }
 
-/** Handle favorite/un-favorite a story */
+// Handle favorite/un-favorite a story 
+// find closest story in dom, retreive ID
+// if marked as favorite(fas) removeFavorite() method and set class to far
+// if not favorite(far) addFavorite() method and set class to fas
 
 async function toggleStoryFavorite(evt) {
   console.debug("toggleStoryFavorite");
@@ -129,19 +135,16 @@ async function toggleStoryFavorite(evt) {
   const $closestLi = $tgt.closest("li");
   const storyId = $closestLi.attr("id");
   const story = storyList.stories.find(s => s.storyId === storyId);
-
-  // see if the item is already favorited (checking by presence of star)
   if ($tgt.hasClass("fas")) {
-    // currently a favorite: remove from user's fav list and change star
     await currentUser.removeFavorite(story);
     $tgt.closest("i").toggleClass("fas far");
   } else {
-    // currently not a favorite: do the opposite
     await currentUser.addFavorite(story);
     $tgt.closest("i").toggleClass("fas far");
   }
 }
 
+//toggle favorite stories
 $storiesLists.on("click", ".star", toggleStoryFavorite);
 
 /** Handle deleting a story. */

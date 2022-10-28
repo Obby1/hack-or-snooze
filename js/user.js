@@ -93,7 +93,8 @@ function updateUIOnUserLogin() {
 }
 
 
-// generate user profile page based off current user instance
+//userProfile populated 
+//generate user profile page based off current user instance
 function generateUserProfile() {
   $("#profile-name").text(currentUser.name);
   $("#profile-username").text(currentUser.username);
