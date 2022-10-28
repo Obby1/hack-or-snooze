@@ -11,7 +11,7 @@
 }
 
 .stories-list > li:hover{
-  font-style: italic;
+  /* font-style: italic; */
   background-color: #1c263881 ;
 }
 
@@ -30,11 +30,12 @@
 } */
 
 .fa-star{
-    transition: all .6s ease-in-out;
+    transition: all 1s ease-in-out;
 } 
 
 .fa-star:hover{
-  transform: scale(2.1);
+  transform: scale(1.6);
+  color: #ff6600;
 }
 
 
